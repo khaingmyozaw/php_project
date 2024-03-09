@@ -11,6 +11,13 @@
 
         <h3 class="mb-3">Login</h3>
 
+        <!-- if login fail, this code will be worked  -->
+        <?php if(isset($_GET['incorrect'])): ?>
+            <div class="alert alert-warning alert-dismissable fade show" role="alert">
+                Invalid email or password!
+            </div>
+        <?php endif ?>
+
         <form action="_actions/login.php" method="post">
             <div class="form-group mb-3">
                 <input type="email" id="email" class="form-control" name="email" placeholder="Enter your email" required>
