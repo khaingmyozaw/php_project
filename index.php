@@ -13,8 +13,15 @@
 
         <!-- if login fail, this code will be worked  -->
         <?php if(isset($_GET['incorrect'])): ?>
-            <div class="alert alert-warning alert-dismissable fade show" role="alert">
+            <div class="alert alert-warning" role="alert">
                 Invalid email or password!
+            </div>
+        <?php endif ?>
+
+        <!-- if register success, this code will be worked  -->
+        <?php if(isset($_GET['register'])): ?>
+            <div class="alert alert-success" role="alert">
+                Account created successfully.
             </div>
         <?php endif ?>
 

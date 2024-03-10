@@ -14,5 +14,5 @@ $statement = $table->insert([
     "password" => $_POST["password"],
 ]);
 
-HTTP::headTo("index.php", "auth=success");
+HTTP::headTo("index.php", "register=success");
 

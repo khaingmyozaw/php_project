@@ -29,4 +29,19 @@ class UsersTable {
             exit();
         }
     }
+
+    // To find whether user is exited before, if exited login
+    public function find($email, $password)
+    {
+        try {
+            $statement = $this->db->prepare("SELECT * FROM users WHERE email=:email AND password=:password");
+            $statement->execute(["email"=>$email, "password"=>$password]);
+            $user = $statement->fetch();
+
+            return $user;
+        }catch(PDOException $e) {
+            echo $e->getMessage();
+            exit();
+        }
+    }
 }
