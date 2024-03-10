@@ -1,5 +1,7 @@
 <?php
 
+// this code is working for index.php file
+
 include("../vendor/autoload.php");
 
 use Helpers\HTTP;

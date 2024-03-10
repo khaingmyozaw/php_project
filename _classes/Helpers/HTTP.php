@@ -2,6 +2,8 @@
 
 namespace Helpers;
 
+
+// create shortcut for heading files
 class HTTP {
     static $base = "http://localhost/php_project/";
     static function headTo($path, $q="")

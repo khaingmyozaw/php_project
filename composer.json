@@ -4,7 +4,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Helpers\\": "_classes/Helpers"
+            "Helpers\\": "_classes/Helpers",
+            "Libs\\": "_classes/Libs"
         }
     }
 }
