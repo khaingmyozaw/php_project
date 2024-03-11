@@ -44,4 +44,20 @@ class UsersTable {
             exit();
         }
     }
+
+    // To upload profile picture to database
+    public function uploadProfile($id, $photo)
+    {
+        try {
+            $statement = $this->db->prepare("UPDATE users SET photo=:photo WHERE id=:id");
+        $statement->execute([
+            "id" => $id,
+            "photo" => $photo
+        ]);
+        return $statement->rowCount();
+        }catch (PDOException $e) {
+            echo $e->getMessage();
+            exit();
+        }
+    }
 }
