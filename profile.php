@@ -65,7 +65,8 @@
 
         </div>
         <div class="float-end"> 
-            <a href="_actions/logout.php" class="text-danger">Logout</a>
+            <a href="admin.php" class="btn btn-info">Admin page</a>
+            <a href="_actions/logout.php" class="btn btn-outline-danger">Logout</a>
         </div>
 
     </div>

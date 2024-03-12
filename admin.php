@@ -5,7 +5,10 @@
 
     use Libs\Database\MySQL;
     use Libs\Database\UsersTable;
-    
+    use Helpers\Auth;
+
+    $auth = Auth::check();
+
     $table = new UsersTable(new MySQL);
     $users = $table->getAll();
 
@@ -26,6 +29,13 @@
             <a href="#" class="navbar-brand">Admin</a>
 
             <ul class="navbar-nav">
+
+                <li class="nav-item">
+                    <a href="profile.php" class="nav-link text-white me-3">
+                        <?= $auth->name ?>
+                    </a>
+                </li>
+
                 <li class="nav-item">
                 <a href="_actions/logout.php" class="nav-link text-danger">Logout</a>
                 </li>
@@ -64,14 +74,25 @@
                     </td>
                     <td>
                         <div class="btn-group">
+                            
+                            <div class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">Role</button>
 
-                                <?php if($user -> suspended): ?>
-                                    <a href="_actions/unsuspend.php?id=<?= $user->id ?>" class="btn btn-warning">Ban user</a>
-                                <?php else: ?>
-                                    <a href="_actions/suspend.php?id=<?= $user->id ?>" class="btn btn-outline-warning">Ban user</a>
-                                <?php endif ?>
+                                <ul class="dropdown-menu">
+                                    <li><a href="_actions/roles.php?id=<?= $user->id ?>&role=3" class="dropdown-item">Admin</a></li>
+                                    <li><a href="_actions/roles.php?id=<?= $user->id ?>&role=2" class="dropdown-item">Manager</a></li>
+                                    <li><a href="_actions/roles.php?id=<?= $user->id ?>&role=1" class="dropdown-item">User</a></li>
+                                </ul>
 
-                                <a href="_actions/delete.php?id=<?= $user->id ?>" class="btn btn-outline-danger">Delete</a>
+                            </div>
+                            
+                            <?php if($user -> suspended): ?>
+                                <a href="_actions/unsuspend.php?id=<?= $user->id ?>" class="btn btn-warning">Ban user</a>
+                            <?php else: ?>
+                                <a href="_actions/suspend.php?id=<?= $user->id ?>" class="btn btn-outline-warning">Ban user</a>
+                            <?php endif ?>
+
+                            <a href="_actions/delete.php?id=<?= $user->id ?>" class="btn btn-outline-danger">Delete</a>
                         </div>
                     </td>
                 </tr>

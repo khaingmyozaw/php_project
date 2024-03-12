@@ -95,6 +95,24 @@ class UsersTable {
         }
     }
 
+    // Change role to users
+    public function changeRole($id, $role)
+    {
+        try {
+            $statement = $this->db->prepare(
+                "UPDATE users SET role_id=:role_id WHERE id=:id"
+            );
+            $statement->execute([
+                "id"=>$id,
+                "role_id"=>$role
+            ]);
+            return $statement->rowCount();
+        }catch (PDOException $e) {
+            echo $e->getMessage();
+            exit();
+        }
+    }
+
     // Unban user
     public function unsuspendUser($id)
     {
