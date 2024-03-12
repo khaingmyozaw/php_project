@@ -78,6 +78,39 @@ class UsersTable {
         }
     }
 
+    // Ban user
+    public function suspendUser($id)
+    {
+        try {
+            $statement = $this->db->prepare(
+                "UPDATE users SET suspended=1 WHERE id=:id"
+            );
+            $statement->execute([
+                "id"=>$id
+            ]);
+            return $statement->rowCount();
+        }catch (PDOException $e) {
+            echo $e->getMessage();
+            exit();
+        }
+    }
+
+    // Unban user
+    public function unsuspendUser($id)
+    {
+        try {
+            $statement = $this->db->prepare(
+                "UPDATE users SET suspended=0 WHERE id=:id"
+            );
+            $statement->execute([
+                "id"=>$id
+            ]);
+            return $statement->rowCount();
+        }catch (PDOException $e) {
+            echo $e->getMessage();
+            exit();
+        }
+    }
 
     // Delete user from database
     public function deleteUser($id)

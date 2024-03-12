@@ -65,7 +65,11 @@
                     <td>
                         <div class="btn-group">
 
-                                
+                                <?php if($user -> suspended): ?>
+                                    <a href="_actions/unsuspend.php?id=<?= $user->id ?>" class="btn btn-warning">Ban user</a>
+                                <?php else: ?>
+                                    <a href="_actions/suspend.php?id=<?= $user->id ?>" class="btn btn-outline-warning">Ban user</a>
+                                <?php endif ?>
 
                                 <a href="_actions/delete.php?id=<?= $user->id ?>" class="btn btn-outline-danger">Delete</a>
                         </div>
