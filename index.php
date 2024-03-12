@@ -37,5 +37,8 @@
             <p>Don't have an account? <a href="register.php">Register</a></p>
         </form>
     </div>
+
+
+        <script src="js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

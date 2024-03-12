@@ -60,4 +60,37 @@ class UsersTable {
             exit();
         }
     }
+
+
+    // Get all data to put into table from admin page
+    public function getAll()
+    {
+        try{
+            $statement = $this->db->query(
+                "SELECT users.*, roles.name AS role 
+            FROM users LEFT JOIN roles
+            ON users.role_id=roles.id");
+
+            return $statement->fetchAll();
+        }catch(PDOException $e) {
+            echo $e->getMessage();
+            exit();
+        }
+    }
+
+
+    // Delete user from database
+    public function deleteUser($id)
+    {
+        try {
+            $statement = $this->db->prepare(
+                "DELETE FROM users WHERE id=:id"
+            );
+            $statement->execute(["id" => $id]);
+            return $statement->rowCount();
+        }catch(PDOException $e) {
+            echo $e->getMessage();
+            exit();
+        }
+    }
 }
