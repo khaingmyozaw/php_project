@@ -15,12 +15,15 @@ $password = $_POST['password'];
 
 $user = $table->find($email, $password);
 
-if($user)
-{
-    session_start();
-
-    $_SESSION['user'] = $user;
-    HTTP::headTo("profile.php");
-} else {
-    HTTP::headTo("index.php", "incorrect=login");
+if($user) {
+    if($user->suspended) {
+        HTTP::headTo("index.php", "suspended=accound");
+    }else {
+        session_start();
+        $_SESSION['user'] = $user;
+        HTTP::headTo("profile.php");
+    }
+        
+}else {
+    HTTP::headTo("index.php", "error=login");
 }

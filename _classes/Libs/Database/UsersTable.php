@@ -35,7 +35,10 @@ class UsersTable {
     {
         try {
             $statement = $this->db->prepare("SELECT * FROM users WHERE email=:email AND password=:password");
-            $statement->execute(["email"=>$email, "password"=>$password]);
+            $statement->execute([
+                "email"=>$email,
+                "password"=>$password,
+            ]);
             $user = $statement->fetch();
 
             return $user;
@@ -49,7 +52,7 @@ class UsersTable {
     public function uploadProfile($id, $photo)
     {
         try {
-            $statement = $this->db->prepare("UPDATE users SET photo=:photo WHERE id=:id");
+            $statement = $this->db->prepare("UPDATE users SET photo=:photo, updated_at=NOW() WHERE id=:id");
         $statement->execute([
             "id" => $id,
             "photo" => $photo
@@ -83,7 +86,7 @@ class UsersTable {
     {
         try {
             $statement = $this->db->prepare(
-                "UPDATE users SET suspended=1 WHERE id=:id"
+                "UPDATE users SET suspended=1, updated_at=NOW() WHERE id=:id"
             );
             $statement->execute([
                 "id"=>$id
@@ -100,7 +103,7 @@ class UsersTable {
     {
         try {
             $statement = $this->db->prepare(
-                "UPDATE users SET role_id=:role_id WHERE id=:id"
+                "UPDATE users SET role_id=:role_id, updated_at=NOW() WHERE id=:id"
             );
             $statement->execute([
                 "id"=>$id,
@@ -118,7 +121,7 @@ class UsersTable {
     {
         try {
             $statement = $this->db->prepare(
-                "UPDATE users SET suspended=0 WHERE id=:id"
+                "UPDATE users SET suspended=0, updated_at=NOW() WHERE id=:id"
             );
             $statement->execute([
                 "id"=>$id
@@ -144,4 +147,16 @@ class UsersTable {
             exit();
         }
     }
+
+    // check admin number
+    public function adminCount() {
+        try{
+            $statement = $this->db->query("SELECT * FROM users WHERE role_id=3");
+            return $statement->rowCount();
+        }catch (PDOException $e) {
+            echo $e->getMessage();
+            exit();
+        }
+    }
+
 }

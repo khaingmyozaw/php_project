@@ -24,6 +24,10 @@
             <div class="mt-3 mx-auto" style="width: 200px;">
                 <img src="_actions/photos/<?=$user->photo?>" alt="profile" style="width: 200px;" class="img-thumbnail">
             </div>
+        <?php endif ?> 
+
+        <?php if(isset($_GET["type"])) :?>
+            <div class="alert alert-warning">file not upload</div>
         <?php endif ?>
 
         <form action="_actions/upload.php" method="post" enctype="multipart/form-data">
