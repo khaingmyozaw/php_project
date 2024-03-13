@@ -12,8 +12,8 @@
         <h3 class="mb-3">Login</h3>
 
         <!-- if login fail, this code will be worked  -->
-        <?php if(isset($_GET['error'])): ?>
-            <div class="alert alert-danger" role="alert">
+        <?php if(isset($_GET['incorrect'])): ?>
+            <div class="alert alert-warning" role="alert">
                 Invalid email or password!
             </div>
         <?php endif ?>
@@ -22,13 +22,6 @@
         <?php if(isset($_GET['register'])): ?>
             <div class="alert alert-success" role="alert">
                 Account created successfully.
-            </div>
-        <?php endif ?>
-
-        <!-- if user is suspended  -->
-        <?php if(isset($_GET['suspended'])): ?>
-            <div class="alert alert-warning" role="alert">
-                Your account was suspended!
             </div>
         <?php endif ?>
 

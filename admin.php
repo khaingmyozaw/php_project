@@ -21,10 +21,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Page</title>
     <link href="css/bootstrap.min.css" rel="stylesheet"/>
-
-	<!-- datatables -->
-	<link rel="stylesheet" href="https://cdn.datatables.net/2.0.1/css/dataTables.dataTables.min.css">
     
+    <!-- dataTable  -->
+    <link href="https://cdn.datatables.net/2.0.2/css/dataTables.dataTables.min.css" rel="stylesheet"/>
 </head>
 <body>
     
@@ -46,33 +45,31 @@
             </ul>
         </div>
     </nav>
+    
+     <!-- change role error  -->
+     <?php if(isset($_GET['change_role'])): ?>
+        <div class="alert alert-danger text-center  " role="alert">
+            You can't change because there is no admin user anymore!
+        </div>
+    <?php endif ?>
 
-
-    <!-- restrict from deleting self  -->
+    <!-- ban error  -->
+     <?php if(isset($_GET['ban'])): ?>
+        <div class="alert alert-warning text-center  " role="alert">
+            You can't ban yourself!
+        </div>
+    <?php endif ?>
+    
+    <!-- delete error  -->
     <?php if(isset($_GET['delete'])): ?>
-        <div class="alert alert-danger text-center" role="alert">
-            Can't delete yourself!
-        </div>
-    <?php endif ?>
-
-    <!-- restrict from banning self  -->
-    <?php if(isset($_GET['suspend'])): ?>
-        <div class="alert alert-warning text-center" role="alert">
-            Can't ban yourself!
-        </div>
-    <?php endif ?>
-
-    <!-- when trying to delete adimin and if there is no admin anymore this error message will be work  -->
-    <?php if(isset($_GET['change_role'])): ?>
-        <div class="alert alert-danger text-center" role="alert">
-            You can't change because there is no admin anymore!
-        </div>
-    <?php endif ?>
+       <div class="alert alert-danger text-center  " role="alert">
+           You can't delete yourself!
+       </div>
+   <?php endif ?>
 
     <div class="container">
-        
-        <table id="myTable" class="table table-strip table-dark my-4">
 
+        <table class="table table-strip table-dark my-4" id="myTable">
             <thead>
                 <tr>
                     <th>Id</th>
@@ -82,6 +79,7 @@
                     <th>Role</th>
                     <th></th>           
                 </tr>
+
             </thead>
 
             <tbody>
@@ -122,7 +120,7 @@
                                 <?php if($auth->role_id >= 2): ?>
 
                                     <?php if($user -> suspended): ?>
-                                        <a href="_actions/unsuspend.php?id=<?= $user->id ?>" class="btn btn-warning">Ban user</a>
+                                        <a href="_actions/unsuspend.php?id=<?= $user->id ?>" class="btn btn-warning">Banned user</a>
                                     <?php else: ?>
                                         <a href="_actions/suspend.php?id=<?= $user->id ?>" class="btn btn-outline-warning">Ban user</a>
                                     <?php endif ?>
@@ -135,8 +133,8 @@
                             </div>
                         </td>
                     </tr>
-                    <?php endforeach ?>
-                </tbody>
+                <?php endforeach ?>
+            </tbody>
 
         </table>
 
@@ -145,17 +143,19 @@
 
     <script src="js/bootstrap.bundle.min.js"></script>
 
-    <!-- jquery -->
-	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    
-	<script src="https://cdn.datatables.net/2.0.1/js/dataTables.min.js"></script>
+    <!-- jQuery  -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- dataTable  -->
+    <script src="https://cdn.datatables.net/2.0.2/js/dataTables.min.js"></script>
     <script>
 
-        $(document).ready(function(){
-			// console.log('hi');
-
-			$('#myTable').DataTable();
-		})
+        $(document).ready(
+            function() {
+                // console.log("hello");
+                new DataTable("#myTable");
+            }
+        )
 
     </script>
 </body>
