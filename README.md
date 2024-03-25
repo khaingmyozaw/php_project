@@ -23,16 +23,16 @@ Before you begin, ensure you have the following installed on your system:
 
 1. clone my project
 
-```http
+```cash
   git clone https://github.com/khaingmyozaw/php_project.git
 ```
 2. 
-```http 
+```cash
   cd to_your_project_directory
   ```
 3. If your have already install composer, run this command in your project directory
 
-```http
+```cash
   composer require fakerphp/fakerphp
   ```
   or
