@@ -36,7 +36,11 @@ Before you begin, ensure you have the following installed on your system:
   composer require fakerphp/fakerphp
   ```
   or
-if you don't have, install 
+```cash
+  composer install
+  ```
+
+or even if you don't have, install 
 [Composer](https://getcomposer.org/download/) first.
 
 then
